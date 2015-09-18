@@ -108,10 +108,7 @@ def Laun():
 		print("Uploading ...")
 		for fn in file_name:
 			fp = open(fn,'rb')
-			if fn == client.metadata('/')[u'contents'][:][u'path']:
-				continue
-			else:
-				response = client.put_file(fn, fp)
+			response = client.put_file(fn, fp)
 		print("Uploaded")
 		#print 'uploaded', response
 	elif flags.startswith('d'):
@@ -123,9 +120,11 @@ def Laun():
 			out.close()
 			if len(flags) > 1:
 				client.file_delete(fn) 
+		print("Downloaded")
 	elif flags == 'r':
 		for fn in file_name:
 			client.file_delete(fn)
+		print("Removed")
 		
 
 
