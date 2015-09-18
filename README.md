@@ -21,10 +21,10 @@ client = dropbox.client.DropboxClient(access_token)
 
 ```
 
-* Reference : Dropbox python api documentation
+Reference : ```Dropbox python api documentation```
 
-* Usage : Look usage docs
 
+Usage
 ```Bash
 ./Laun -h 
 ```
