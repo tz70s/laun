@@ -25,8 +25,8 @@ def command():
 
 	docs = '''
 	help : -h
-	uploaded : -u [file ...]
-	downloaded: -d [-r (remove from dropbox)][file ...]
+	upload : -u [file ...]
+	download: -d [-r (remove from dropbox)][file ...]
 	'''
 
 	mapping = ['-h','-u','-d','-r']
@@ -108,7 +108,10 @@ def Laun():
 		print("Uploading ...")
 		for fn in file_name:
 			fp = open(fn,'rb')
-			response = client.put_file(fn, fp)
+			if fn == client.metadata('/')[u'contents'][:][u'path']:
+				continue
+			else:
+				response = client.put_file(fn, fp)
 		print("Uploaded")
 		#print 'uploaded', response
 	elif flags.startswith('d'):
@@ -123,8 +126,7 @@ def Laun():
 	elif flags == 'r':
 		for fn in file_name:
 			client.file_delete(fn)
-		print("")
-		print(client.files('/'))
+		
 
 
 Laun()
