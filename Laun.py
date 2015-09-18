@@ -123,8 +123,8 @@ def Laun():
 	elif flags == 'r':
 		for fn in file_name:
 			client.file_delete(fn)
-
-
+		print("")
+		print(client.files('/'))
 
 
 Laun()
