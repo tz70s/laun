@@ -23,10 +23,13 @@ client = dropbox.client.DropboxClient(access_token)
 
 ```
 
-Reference : ```Dropbox python api documentation```
+### Reference
+```Bash
+Dropbox python api documentation
+```
 
 
-Usage
+### Usage
 ```Bash
 # clone
 git clone https://github.com/tz70s/Laun.git
