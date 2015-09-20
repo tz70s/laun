@@ -131,7 +131,7 @@ def Laun():
 	access_token, user_id = flow.finish(code)
 	'''
 	try:
-		client = dropbox.client.DropboxClient('VVBW0vrdiQAAAAAAAAAALbO044uwhGYjiXyKI95o47nn77sjov0xyJA8-7fNDaNV')
+		client = dropbox.client.DropboxClient('')
 	except ConnectError as err:
 		print(err)
 		sys.exit()
