@@ -7,6 +7,7 @@ Any suggestion: su3g4284zo6y7@gmail.com
 import dropbox
 import os
 import sys
+import json
 
 class ConnectError(BaseException(" error")):pass
 
@@ -25,14 +26,21 @@ def command():
 
 	docs = '''
 	help : -h
+	list files : -l 
 	upload : -u [file ...]
-	download: -d [-r (remove from dropbox)][file ...]
+	download : -d [-r (remove from dropbox)][file ...]
 	'''
 
-	mapping = ['-h','-u','-d','-r']
+	mapping = ['-h','-u','-d','-r','-l']
 	flags = ''
 
-	#command usage 
+	#command usage
+
+	if len(sys.argv[1:]) < 1:
+		print ("Please input flags")
+		print('Usage')
+		print(docs)
+		sys.exit() 
 
 	if sys.argv[1:] == 0:
 		print("Wrong input")
@@ -53,6 +61,9 @@ def command():
 			flags = 'dr'
 	elif sys.argv[1].lower() == '-r':
 		flags = 'r'
+	elif sys.argv[1].lower() == '-l':
+		flags = 'l'
+
 
 	if flags == 'u':
 		try:
@@ -85,8 +96,32 @@ def command():
 			print(err)
 			print("Please type the file name")
 
+	elif flags == 'l':
+		file_name = None
+
+
 	#print(file_name)
 	return file_name, flags
+
+
+def getlist(client):
+	#get file list
+	data = client.metadata('/')
+	rt = ""
+	rt += "path: / \n"
+	for cont in data[u'contents']:
+		#print "\t" + cont[u'path'].lstrip('/')
+		rt += "\t" + cont[u'path'].lstrip('/') + '\n'
+	return rt
+
+def inlist(client , file):
+	data = client.metadata('/')
+	for cont in data[u'contents']:
+		if file == cont[u'path'].lstrip('/'):
+			return True
+		else:
+			continue
+	return False
 
 def Laun():
 	'''
@@ -96,7 +131,7 @@ def Laun():
 	access_token, user_id = flow.finish(code)
 	'''
 	try:
-		client = dropbox.client.DropboxClient('')
+		client = dropbox.client.DropboxClient('VVBW0vrdiQAAAAAAAAAALbO044uwhGYjiXyKI95o47nn77sjov0xyJA8-7fNDaNV')
 	except ConnectError as err:
 		print(err)
 		sys.exit()
@@ -107,6 +142,9 @@ def Laun():
 	if flags == 'u':
 		print("Uploading ...")
 		for fn in file_name:
+			if inlist(client, fn):
+				print "\t"+fn + " had existed"
+				continue
 			fp = open(fn,'rb')
 			response = client.put_file(fn, fp)
 		print("Uploaded")
@@ -114,6 +152,8 @@ def Laun():
 	elif flags.startswith('d'):
 		print("Downloading ...")
 		for fn in file_name:
+			if not inlist(client, fn):
+				continue
 			fp = client.get_file(fn)
 			out = open(fn,'wb')
 			out.write(fp.read())
@@ -123,9 +163,13 @@ def Laun():
 		print("Downloaded")
 	elif flags == 'r':
 		for fn in file_name:
+			if not inlist(client, fn):
+				continue
 			client.file_delete(fn)
 		print("Removed")
-		
+
+	elif flags == 'l':
+		print getlist(client)
 
 
 Laun()
