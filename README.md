@@ -1,7 +1,7 @@
 # Laun
 #### A useless lazy tool
 
-![image](https://github.com/tz70s/Laun/blob/master/Shots/snapshot.jpg)
+![image](https://github.com/tz70s/Laun/blob/master/Shots/snapshot.png)
 
 I'm inspired to do files exchange by my way via dropbox, because my usbs got disappeared very often.</br>
 This is a weak command line tool I think.</br>

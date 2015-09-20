@@ -29,6 +29,7 @@ def command():
 	list files : -l 
 	upload : -u [file ...]
 	download : -d [-r (remove from dropbox)][file ...]
+	remove : -r
 	'''
 
 	mapping = ['-h','-u','-d','-r','-l']
