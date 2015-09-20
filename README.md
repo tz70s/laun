@@ -28,5 +28,19 @@ Reference : ```Dropbox python api documentation```
 
 Usage
 ```Bash
+# clone
+git clone https://github.com/tz70s/Laun.git
+
+# usage doc
 ./Laun -h 
+# list file
+./Luan -l
+# upload file
+./Luan -u [file...] or [*]
+# download file
+./Luan -d [-r (remove from dropbox)][file...]
+# remove file from dropbox
+./Luan -r [file...]
+
+# if file have special characters, use '\' before char
 ```
