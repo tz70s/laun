@@ -39,7 +39,7 @@ git clone https://github.com/tz70s/Laun.git
 # list file
 ./Luan -l
 # upload file
-./Luan -u [file...] or [*]
+./Luan -u [file...] or [*](for uploading all files)
 # download file
 ./Luan -d [-r (remove from dropbox)][file...]
 # remove file from dropbox
